@@ -1,4 +1,4 @@
-const Ship = (length) => {
+export default function Ship(length) {
   let hits = 0;
 
   function hit() {
@@ -10,4 +10,4 @@ const Ship = (length) => {
   }
 
   return { hit, isSunk };
-};
+}
