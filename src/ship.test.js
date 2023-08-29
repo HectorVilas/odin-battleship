@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import Ship from './ship';
 
-const testShip = Ship(3);
+const testShip = new Ship(3);
 
 test('Check if new ship, length of three, is sunk:', () => {
   expect(testShip.isSunk()).toBe(false);
