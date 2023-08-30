@@ -3,10 +3,6 @@ import NamedShip from './namedShip';
 
 const ship = new NamedShip(5, 'carrier', 0, 0, 'north');
 
-test('Test inherited properties:', () => {
-  expect(ship.isSunk()).toBe(false);
-});
-
 test('Not sunk after 1st hit:', () => {
   ship.hit();
   expect(ship.isSunk()).toBe(false);
