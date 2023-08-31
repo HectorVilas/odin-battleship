@@ -32,4 +32,13 @@ export default class Gameboard {
     if (facing === 'west' && x + (length - 1) > (this.width - 1)) return false;
     return true;
   }
+
+  isGameLost() {
+    let allSunk = true;
+    this.fleet.forEach((ship) => {
+      if (!ship.isSunk()) allSunk = false;
+    });
+
+    return allSunk;
+  }
 }
