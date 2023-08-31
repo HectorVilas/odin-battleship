@@ -41,4 +41,12 @@ export default class Gameboard {
 
     return allSunk;
   }
+
+  resetBoard() {
+    this.fleet = [];
+    this.attacked = [];
+    for (const ship in this.port) {
+      this.port[ship].sailed = false;
+    }
+  }
 }
