@@ -6,6 +6,8 @@ export default class NamedShip extends Ship {
     this.name = name;
     this.x = x;
     this.y = y;
+    /* NOTE: the front of the ship is placed on X and Y, the rest is drawn behind.
+     If ship faces north, then the rest of it draws going south */
     this.facing = facing;
   }
 }
