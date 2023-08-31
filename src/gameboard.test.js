@@ -21,6 +21,21 @@ test('Same ship can\'t be placed twice', () => {
   expect(board.fleet.length).toBe(1);
 });
 
+test('No ship is added if ship name is incorrect', () => {
+  board.placeShip('S.S.LaMancha', 0, 0, 'north');
+  expect(board.fleet.length).toBe(1);
+});
+
+test('No ship is added if it, or part of it, ends outside the board', () => {
+  board.placeShip('cruiser', 1, 0, 'east');
+  expect(board.fleet.length).toBe(1);
+});
+
+test('No ship is added if facing direction is incorrect', () => {
+  board.placeShip('cruiser', 5, 5, 'norte');
+  expect(board.fleet.length).toBe(1);
+});
+
 test('Not all ships are sunk', () => {
   expect(board.isGameLost()).toBe(false);
 });
