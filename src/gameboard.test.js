@@ -48,3 +48,14 @@ test('All ships are sunk after sinking the only ship', () => {
   board.fleet[0].hit();
   expect(board.isGameLost()).toBe(true);
 });
+
+test('The board resets properly', () => {
+  expect(board.fleet.length).toBe(1);
+  board.resetBoard();
+  expect(board.fleet.length).toBe(0);
+  let hasUnavailableShips = true;
+  for (const ship in board.port) {
+    if (!board.port[ship].sailed) hasUnavailableShips = false;
+  }
+  expect(hasUnavailableShips).toBe(false);
+});
