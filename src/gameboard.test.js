@@ -3,16 +3,16 @@ import Gameboard from './gameboard';
 
 const board = new Gameboard(10, 10);
 
-test('Check if carrier ship is unavailable', () => {
+test('Carrier ship is available for placing', () => {
   expect(board.port.carrier.sailed).toBe(false);
 });
 
-test('Place carrier ship and check if it is inside board', () => {
+test('Carrier ship is inside board after placing it', () => {
   board.placeShip('carrier', 5, 3, 'west');
   expect(board.fleet.length).toBe(1);
 });
 
-test('Check if carrier ship is now unavailable', () => {
+test('Carrier ship is now unavailable for placing', () => {
   expect(board.port.carrier.sailed).toBe(true);
 });
 
@@ -21,11 +21,11 @@ test('Same ship can\'t be placed twice', () => {
   expect(board.fleet.length).toBe(1);
 });
 
-test('Check if all ships are sunk (must be false)', () => {
+test('Not all ships are sunk', () => {
   expect(board.isGameLost()).toBe(false);
 });
 
-test('Check if all ships are sunk after sinking the only ship (must be true)', () => {
+test('All ships are sunk after sinking the only ship', () => {
   board.fleet[0].hit();
   board.fleet[0].hit();
   board.fleet[0].hit();
