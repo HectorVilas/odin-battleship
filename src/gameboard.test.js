@@ -20,3 +20,16 @@ test('Same ship can\'t be placed twice', () => {
   board.placeShip('carrier', 5, 3, 'west');
   expect(board.fleet.length).toBe(1);
 });
+
+test('Check if all ships are sunk (must be false)', () => {
+  expect(board.isGameLost()).toBe(false);
+});
+
+test('Check if all ships are sunk after sinking the only ship (must be true)', () => {
+  board.fleet[0].hit();
+  board.fleet[0].hit();
+  board.fleet[0].hit();
+  board.fleet[0].hit();
+  board.fleet[0].hit();
+  expect(board.isGameLost()).toBe(true);
+});
