@@ -54,8 +54,8 @@ test('The board resets properly', () => {
   board.resetBoard();
   expect(board.fleet.length).toBe(0);
   let hasUnavailableShips = true;
-  for (const ship in board.port) {
+  Object.keys(board.port).forEach((ship) => {
     if (!board.port[ship].sailed) hasUnavailableShips = false;
-  }
+  });
   expect(hasUnavailableShips).toBe(false);
 });
