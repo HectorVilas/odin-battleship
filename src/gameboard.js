@@ -19,7 +19,7 @@ export default class Gameboard {
     const chosenShip = this.port?.[name];
     if (!chosenShip || chosenShip.sailed) return;
     if (!this.#isInsideBoard(chosenShip.length, x, y, facing)) return;
-    this.fleet.push(new NamedShip(this.port[name].length, name, x, y, facing));
+    this.fleet.push(new NamedShip(chosenShip.length, name, x, y, facing));
     chosenShip.sailed = true;
   }
 
