@@ -24,12 +24,18 @@ export default class Gameboard {
   }
 
   #isInsideBoard(length, x, y, facing) {
-    if (x < 0 || x > (this.width - 1) || y < 0 || y > (this.height - 1)) return false;
-    if (!['north', 'south', 'east', 'west'].includes(facing)) return false;
-    if (facing === 'north' && y + (length - 1) > (this.height - 1)) return false;
-    if (facing === 'south' && y - (length - 1) < 0) return false;
-    if (facing === 'east' && x - (length - 1) < 0) return false;
-    if (facing === 'west' && x + (length - 1) > (this.width - 1)) return false;
+    const isOutside = x < 0 || x > (this.width - 1) || y < 0 || y > (this.height - 1);
+    const isFacingWrong = !['north', 'south', 'east', 'west'].includes(facing);
+    const isOutNorth = facing === 'north' && y + (length - 1) > (this.height - 1);
+    const isOutSouth = facing === 'south' && y - (length - 1) < 0;
+    const isOutEast = facing === 'east' && x - (length - 1) < 0;
+    const isOutWest = facing === 'west' && x + (length - 1) > (this.width - 1);
+
+    if (
+      (isOutside || isFacingWrong)
+      || (isOutNorth || isOutSouth || isOutEast || isOutWest)
+    ) return false;
+
     return true;
   }
 
