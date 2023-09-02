@@ -36,6 +36,11 @@ test('No ship is added if facing direction is incorrect', () => {
   expect(board.fleet.length).toBe(1);
 });
 
+test('Can\'t place ship overlaping', () => {
+  board.placeShip('battleship', 5, 1, 'north');
+  expect(board.fleet.length).toBe(1);
+});
+
 test('Not all ships are sunk', () => {
   expect(board.isGameLost()).toBe(false);
 });
