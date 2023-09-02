@@ -1,4 +1,5 @@
 import NamedShip from './namedShip';
+import usedCoords from './usedCoords';
 
 export default class Gameboard {
   constructor(width, height) {
@@ -42,8 +43,8 @@ export default class Gameboard {
   }
 
   #isOverlapping(length, x, y, facing) {
-    const occupiedSpaces = this.fleet.map((ship) => this.#usedCoords(ship));
-    const placedShip = this.#usedCoords({
+    const occupiedSpaces = this.fleet.map((ship) => usedCoords(ship));
+    const placedShip = usedCoords({
       length, x, y, facing,
     });
     let overlapsX = false;
@@ -59,19 +60,6 @@ export default class Gameboard {
     });
 
     return overlapsX && overlapsY;
-  }
-
-  #usedCoords(ship) {
-    const posX = ship.x;
-    const posY = ship.y;
-    const coords = { x: [posX], y: [posY] };
-    for (let i = 1; i < ship.length; i += 1) {
-      if (ship.facing === 'north') coords.y.push(posY + i);
-      if (ship.facing === 'south') coords.y.push(posY - i);
-      if (ship.facing === 'east') coords.x.push(posX - i);
-      if (ship.facing === 'west') coords.x.push(posX + i);
-    }
-    return coords;
   }
 
   isGameLost() {
