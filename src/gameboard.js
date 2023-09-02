@@ -30,13 +30,48 @@ export default class Gameboard {
     const isOutSouth = facing === 'south' && y - (length - 1) < 0;
     const isOutEast = facing === 'east' && x - (length - 1) < 0;
     const isOutWest = facing === 'west' && x + (length - 1) > (this.width - 1);
+    const isOverlapping = this.#isOverlapping(length, x, y, facing);
 
     if (
       (isOutside || isFacingWrong)
       || (isOutNorth || isOutSouth || isOutEast || isOutWest)
+      || isOverlapping
     ) return false;
 
     return true;
+  }
+
+  #isOverlapping(length, x, y, facing) {
+    const occupiedSpaces = this.fleet.map((ship) => this.#usedCoords(ship));
+    const placedShip = this.#usedCoords({
+      length, x, y, facing,
+    });
+    let overlapsX = false;
+    let overlapsY = false;
+
+    occupiedSpaces.forEach((ship) => {
+      ship.x.forEach((currentX) => {
+        if (placedShip.x.includes(currentX)) overlapsX = true;
+      });
+      ship.y.forEach((currentY) => {
+        if (placedShip.y.includes(currentY)) overlapsY = true;
+      });
+    });
+
+    return overlapsX && overlapsY;
+  }
+
+  #usedCoords(ship) {
+    const posX = ship.x;
+    const posY = ship.y;
+    const coords = { x: [posX], y: [posY] };
+    for (let i = 1; i < ship.length; i += 1) {
+      if (ship.facing === 'north') coords.y.push(posY + i);
+      if (ship.facing === 'south') coords.y.push(posY - i);
+      if (ship.facing === 'east') coords.x.push(posX - i);
+      if (ship.facing === 'west') coords.x.push(posX + i);
+    }
+    return coords;
   }
 
   isGameLost() {
