@@ -78,4 +78,26 @@ export default class Gameboard {
       this.port[ship].sailed = false;
     });
   }
+
+  receiveAttack(x, y) {
+    let alreadyAttacked = false;
+    this.attacked.forEach((hit) => {
+      if (hit.x === x && hit.y === y) alreadyAttacked = true;
+    });
+    if (alreadyAttacked) return;
+
+    this.attacked.push({
+      x, y,
+    });
+
+    this.fleet.forEach((ship) => {
+      const coords = usedCoords({
+        length: ship.length, x: ship.x, y: ship.y, facing: ship.facing,
+      });
+      const hitsOnX = coords.x.includes(x);
+      const hitsOnY = coords.y.includes(y);
+
+      if (hitsOnX && hitsOnY) ship.hit();
+    });
+  }
 }
