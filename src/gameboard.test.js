@@ -60,11 +60,10 @@ test('Board can\'t receive attack more than once in the same spot', () => {
 });
 
 test('All ships are sunk after sinking the only ship', () => {
-  board.fleet[0].hit();
-  board.fleet[0].hit();
-  board.fleet[0].hit();
-  board.fleet[0].hit();
-  board.fleet[0].hit();
+  board.receiveAttack(5, 3);
+  board.receiveAttack(6, 3);
+  board.receiveAttack(8, 3);
+  board.receiveAttack(9, 3);
   expect(board.isGameLost()).toBe(true);
 });
 
