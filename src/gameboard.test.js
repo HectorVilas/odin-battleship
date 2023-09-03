@@ -50,6 +50,15 @@ test('Board receives attack on ship\'s position, ship adds a hit', () => {
   expect(board.fleet[0].hits).toBe(1);
 });
 
+test('Board can\'t receive attack more than once in the same spot', () => {
+  board.receiveAttack(7, 3);
+  board.receiveAttack(7, 3);
+  board.receiveAttack(7, 3);
+  board.receiveAttack(7, 3);
+  board.receiveAttack(7, 3);
+  expect(board.fleet[0].hits).toBe(1);
+});
+
 test('All ships are sunk after sinking the only ship', () => {
   board.fleet[0].hit();
   board.fleet[0].hit();
