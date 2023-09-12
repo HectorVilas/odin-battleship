@@ -8,6 +8,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Odin Battleship',
+      favicon: './src/media/images/fav-placeholder.png',
     }),
   ],
   output: {
